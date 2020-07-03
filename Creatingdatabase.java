@@ -21,15 +21,44 @@ catch(ClassNotFoundException cnfex) {
 	cnfex.printStackTrace();
 }
 	try {
-		String msAccessDBName=" "';
+		String msAccessDBName="Database-C\\Users\\Lakhanya\\eclipse-workspace\\src\\DBMLearners.accdb";
 		String dbURL="jdbc:odbc:Driver=" +"{Microsoft Access Driver(*.mdb,*accdb)};"+
 		"DBQ=" + msAccessDBName+ ";DriverID=22;READONLY=true";
 		
 		connection= DriverManager.getConnection(dbURL);
 		statement=connection.createStatement();
 		
+		resultset=statement.execute("INSERT INTO Learners Details"+ "VALUES(03051236987403,'Amila','Simanda","12May2003","Female",'9')");"
+		System.out.println("Inserted recorf into the table");
+
+		resultset=statement.executeQuery("DELETE FROM Learners Details WHERE tName='Lisakhanya'");
+		System.out.println("Recorde Deleted");
 		
+		resultset=statement.executeQuery("SELECT * FROM Parents Details WHERE tSurname LIKE 'M%'");
 		
+		while(resultset.next()) {
+			System.out.println(resultset.getInt(1)+ "\t" +
+		resultset.getString(2)+ "\t"+
+		resultset.getString(3)+"\t"+
+		resultset.getString(4)+"\t"+
+		resultset.getString(5)+"\t"+
+		resultset.getString(6)+"\t"+
+		resultset.getString(7));
+		}
+	}
+	catch(SQLException sqlex) {
+		sqlex.printStackTrace();
+	}
+	finally {
+		if (null != connection) {
+			resultset.close();
+			statement.close();
+			
+			connection.close();
+			}
+	}
+	catch(SQLException sqlex) {
+		sqlex.printStackTrace();
 	}
 	}
 
